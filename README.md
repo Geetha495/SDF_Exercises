@@ -2,13 +2,13 @@
 
 1. Implement max function using variadic template that can take arbitrary number of arguments (which are comparable) and returns the maximum element.
 
-2. Take the thread_pool (Links to an external site.) example and make it terminate gracefully.
+2. Take the [thread_pool](https://github.com/sbjoshi/sanganak-examples/tree/main/cs1023-2021-cpp-examples/thread_pool) example and make it terminate gracefully.
 
 3. Implement a thread_pool with a single queue instead of one queue per thread.
 
 4. Make the thread_pool a singleton
 
-5. Implement a thread_pool with one queue per thread where the thread will terminate if the queue is empty. In this case, the pool need to create another worker thread if there are lesser threads than std::thread::hardware_concurrency().
+5. Implement a thread_pool with one queue per thread where the thread will terminate if the queue is empty. In this case, the pool need to create another worker thread if there are lesser threads than std::'thread'::hardware_concurrency() .
 
 6. Explore destructors and why they need to be virtual.
 
