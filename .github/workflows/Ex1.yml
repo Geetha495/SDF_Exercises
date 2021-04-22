@@ -12,5 +12,5 @@ jobs:
       - name: Compile
         run: g++ Ex1.cpp 
       - name: Run
-      - run: ./a.out
+        run: ./a.out
       - run: echo "🍏 This job's status is ${{ job.status }}."
