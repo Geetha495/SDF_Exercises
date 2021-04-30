@@ -5,7 +5,7 @@ template <typename T> T max(T a, T b)
   return a >= b ? a : b; 
 }
 
-template <typename T, typename... Args>
+template <typename T, typename... Args>//variadic template
  T max(T a,T b, Args... args) 
 {
     return max(max(a,b),args...);
