@@ -2,7 +2,7 @@
 
 [1](https://github.com/Geetha495/SDF_Exercises/blob/main/Ex1.cpp).    Implement max function using variadic template that can take arbitrary number of arguments (which are comparable) and returns the maximum element.
 
-2. Take the [thread_pool](https://github.com/sbjoshi/sanganak-examples/tree/main/cs1023-2021-cpp-examples/thread_pool) example and make it terminate gracefully.
+[2](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex2). Take the [thread_pool](https://github.com/sbjoshi/sanganak-examples/tree/main/cs1023-2021-cpp-examples/thread_pool) example and make it terminate gracefully.
 
 3. Implement a thread_pool with a single queue instead of one queue per thread.
 
