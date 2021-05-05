@@ -32,8 +32,8 @@ using worklistt = thread_safe_worklist_t;
  */
 void empty_queue()
 {
-//    static unsigned i=0;
-  //  fmt::print("empty_queue:Job queue was empty {}\n",i++);
+    //    static unsigned i=0;
+    //  fmt::print("empty_queue:Job queue was empty {}\n",i++);
 }
 
 /**
@@ -44,12 +44,14 @@ void empty_queue()
  * 
  * @param wl worklist from which the thread will keep retrieving
  * work (std::function<void()>) and execute  
+ * @param _flag which is a pointer to the boolean variable flag
+ * It is used to stop the otherwise infinite loop.
  */
-void keep_working(worklistt* wl)
+void keep_working(worklistt *wl, bool* _flag)
 {
-    while(true)
+    while (!(wl->empty()) || *(_flag))
     {
-        std::optional<std::function<void ()>> work = wl->get();
+        std::optional<std::function<void()>> work = wl->get();
         auto f = work.value_or(empty_queue);
         f();
     }
@@ -64,10 +66,10 @@ void keep_working(worklistt* wl)
 class thread_pool_t
 {
     unsigned num_threads; // number of threads in the thread pool
-    
-    std::vector<std::thread*> workers; // vector that stores pointers to worker threads
-    std::vector<worklistt*> worklists; //vector that stores pointers to worklists
-    std::mutex m; //mutex for thread-safety
+    static bool flag;
+    std::vector<std::thread *> workers; // vector that stores pointers to worker threads
+    std::vector<worklistt *> worklists; //vector that stores pointers to worklists
+    std::mutex m;                       //mutex for thread-safety
     /**
      * @brief Create a worker object if pool is not saturated. Corresponding worklist
      * is also created in a thread-safe manner.
@@ -76,18 +78,29 @@ class thread_pool_t
     void create_worker()
     {
         std::lock_guard<std::mutex> guard(m);
-        if(workers.size()<num_threads)
+        if (workers.size() < num_threads)
         {
-            thread_safe_worklist_t* wl = new thread_safe_worklist_t;
-           worklists.push_back(wl); 
-           std::thread* t = new std::thread(keep_working,worklists.back());
-           workers.push_back(t);
-
+            thread_safe_worklist_t *wl = new thread_safe_worklist_t;
+            worklists.push_back(wl);
+            std::thread *t = new std::thread(keep_working, worklists.back(), &flag);
+            workers.push_back(t);
         }
-
     }
-    public:
-    thread_pool_t(unsigned _nthreads):num_threads(_nthreads){}
+
+public:
+    thread_pool_t(unsigned _nthreads) : num_threads(_nthreads) {}
+    int get_workers_size() { return workers.size(); }
+    void close()
+    {
+        flag = false;
+    }
+    void join_threads()
+    {
+        for (auto worker : workers)
+        {
+            (*worker).join();
+        }
+    }
     /**
      * @brief Get the worklist object which has the smallest
      *     number of pending "work" in the list. 
@@ -101,29 +114,25 @@ class thread_pool_t
      * 
      * @return worklistt* , a pointer to the worklist having "lesser" work 
      */
-    worklistt* get_worklist()
+    worklistt *get_worklist()
     {
         create_worker();
         unsigned min = std::numeric_limits<unsigned>::max();
         unsigned index;
         size_t sz = worklists.size();
-        for(unsigned i=0;i<sz;i++)
+        for (unsigned i = 0; i < sz; i++)
         {
             size_t tmpsz = worklists[i]->size();
-            if(tmpsz < min)
+            if (tmpsz < min)
             {
                 min = tmpsz;
-                index=i;
-
+                index = i;
             }
         }
         return worklists[index];
-
     }
-
-
-
-
 };
+
+bool thread_pool_t::flag = true;
 
 #endif
