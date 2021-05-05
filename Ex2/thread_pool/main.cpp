@@ -49,7 +49,7 @@ int main()
     thread_pool_t tp(4); //initialize thread pool
 
     constexpr size_t arrsz = sizeof(arr)/sizeof(std::pair<int,int>);
-
+   // tp.set_assigning_func(true);
     for(unsigned i=0;i<arrsz;i++)
     {
         //push works in a worklist
@@ -57,12 +57,9 @@ int main()
         //push works in a worklist
         tp.get_worklist()->push(print_mul,arr[i].first,arr[i].second);
     }
-
-    //sleep so as to allow other threads to work.
-    std::this_thread::sleep_for(std::chrono::seconds(20));
-
-    //threads are not joined. As an exercise, change the code to use
-    //join and graceful termination via flags instead of infinite-loop
-    //of keep_working
+    tp.close_pool();
+    
+    tp.join_threads();
+    std::cout << "Terminated Gracefully !" << std::endl;
     return EXIT_SUCCESS;
-} 
+}
