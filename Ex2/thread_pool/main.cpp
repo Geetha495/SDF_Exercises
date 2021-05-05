@@ -49,7 +49,6 @@ int main()
     thread_pool_t tp(4); //initialize thread pool
 
     constexpr size_t arrsz = sizeof(arr)/sizeof(std::pair<int,int>);
-   // tp.set_assigning_func(true);
     for(unsigned i=0;i<arrsz;i++)
     {
         //push works in a worklist
