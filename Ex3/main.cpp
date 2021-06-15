@@ -57,8 +57,6 @@ int main()
         tp.get_worklist()->push(print_mul,arr[i].first,arr[i].second);
     }
     std::this_thread::sleep_for(std::chrono::seconds(20));
-    //##################
     tp.join_threads();
-    //##################
     return EXIT_SUCCESS;
 }
