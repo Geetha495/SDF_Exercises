@@ -21,3 +21,17 @@
 10. Implement a template adapter class stack which uses (1) an std::list (2) an std::array.
 
 11. Implement a template adapter class multiset which uses std::map. Note that a multiset is a container which can contain multiple elements of the same value e.g., { 3,4,8,7,3,9,7} is a multiset because 3 and 7 appears twice. Implement methods to insert, remove, remove_all so that a new element can be inserted in this multiset, one element of the given value can be removed and all the elements with the given value can be removed. (Hint: have something to maintain duplicity of an element).
+
+12. Implement a template adapter class queue_t using two std::stack. list_t should allow enqueue and deque operation. enqueue adds an element to the queue and dequeue removes the element which was the oldest element from the queue. Unlike stack this is a FIFO (First-in-First-Out) interface. If you need implement a head operation which returns the element at the head of the queue (oldest element).
+
+13. Implement a reverse iterator on the list that was given in the class. Implement rbegin() and rend() method and then the reverse iterator would go back in the list when you do ++. You need to have a pointer to previous listnode_t as well for this case.
+
+14. Implement an iterator in the list (defined in the class and available in the repo) which only goes through element at even position in the list.
+
+15. Define a class readert which keeps getting a string from a user and then send it to all its observers. Implement an observer which just prints this string, another observer which prints the frequency of every alphabet inside the string (a: 4, b:5, c:6 indicating 'a' appeared 4 times in the string etc), another observer that takes the string writes it to a file. (a) Implement all the classes in a thread-safe manner (b) use subscribe and unsubscribe method and random times and see how the behaviour changes.
+
+16. Think of cases where the update() on the observer is computationally very heavy. Implement an event manager that shields the subject from the runtime of the update() of the observer. Think of scenario with multiple subjects and observers where event manager can be really useful.
+
+17. Implement various sorting algorithms (insertion sort, quick sort, merge sort) as a strategy and ask a user to choose at run-time which of these to use for sorting. (DO NOT use sort available in the standard library)
+
+18. Implement a linear search and a binary search algorithm on an array/vector as strategies. (DO NOT use search available in standard library)
