@@ -1,18 +1,19 @@
 #include <iostream>
 
-template <typename T> T max(T a, T b) 
+template <typename T>
+T max(T a, T b)
 {
-  return a >= b ? a : b; 
+  return a >= b ? a : b;
 }
 
 template <typename T, typename... Args> // variadic template
- T max(T a,T b, Args... args) 
+T max(T a, T b, Args... args)
 {
-    return max(max(a,b),args...);
+  return max(max(a, b), args...);
 }
 
-int main() 
+int main()
 {
-  std::cout << max(1, 2, 3,4) << ":" << max(1.2, -2.3, 3.1) << std::endl;
+  std::cout << max(-1, -2) << ":" << max(1, 2, 3, 4) << ":" << max(1.2, -2.3, 3.1) << std::endl;
   return 0;
 }
