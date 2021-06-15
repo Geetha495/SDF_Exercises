@@ -10,7 +10,7 @@
 
 5. Implement a thread_pool with one queue per thread where the thread will terminate if the queue is empty. In this case, the pool need to create another worker thread if there are lesser threads than std::'thread'::hardware_concurrency() .
 
-6. Explore destructors and why they need to be virtual.
+[6](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex6). Explore destructors and why they need to be virtual.
 
 7. Explore which operators can not be overloaded.
 
