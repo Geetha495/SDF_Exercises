@@ -12,7 +12,7 @@
 
 [6](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex6). Explore destructors and why they need to be virtual.
 
-7. Explore which operators can not be overloaded.
+[7](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex7). Explore which operators can not be overloaded.
 
 8. Implement a template class for matrix. Implement operations for addition, inverse, multiplication of matrices etc.
 
