@@ -54,7 +54,7 @@ int main()
         //push works in a worklist
         tp.get_worklist()->push(print_sum,arr[i].first,arr[i].second);
         //push works in a worklist
-       // tp.get_worklist()->push(print_mul,arr[i].first,arr[i].second);
+        tp.get_worklist()->push(print_mul,arr[i].first,arr[i].second);
     }
     std::this_thread::sleep_for(std::chrono::seconds(20));
     //##################
