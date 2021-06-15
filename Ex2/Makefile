@@ -4,7 +4,7 @@ CC=/usr/bin/g++
 CFLAGS=-std=c++2a -Wall -Werror -pedantic-errors
 FMTDIR=packages/fmt-7.1.3
 INCLUDEDIR=${FMTDIR}/include 
-LIBDIR=$(FMTDIR)
+LIBDIR=$(FMTDIR)/build
 EXE=thread_pool
 
 SRCS=main.cpp

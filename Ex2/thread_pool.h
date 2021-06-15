@@ -44,12 +44,12 @@ void empty_queue()
  * 
  * @param wl worklist from which the thread will keep retrieving
  * work (std::function<void()>) and execute  
- * @param _flag which is a pointer to the boolean variable flag
- * It is used to stop the otherwise infinite loop.
  */
-void keep_working(worklistt *wl, bool* _flag)
+void keep_working(worklistt *wl, bool* flag)
 {
-    while (!(wl->empty()) || *(_flag))
+    // if(wl->empty())
+    //     std::cout<<"empty"<<std::endl;
+    while ( ( !(wl->empty()) ) && (*flag) )
     {
         std::optional<std::function<void()>> work = wl->get();
         auto f = work.value_or(empty_queue);
@@ -66,9 +66,9 @@ void keep_working(worklistt *wl, bool* _flag)
 class thread_pool_t
 {
     unsigned num_threads; // number of threads in the thread pool
-    static bool flag;
     std::vector<std::thread *> workers; // vector that stores pointers to worker threads
     std::vector<worklistt *> worklists; //vector that stores pointers to worklists
+    static bool flag; 
     std::mutex m;                       //mutex for thread-safety
     /**
      * @brief Create a worker object if pool is not saturated. Corresponding worklist
@@ -77,12 +77,13 @@ class thread_pool_t
      */
     void create_worker()
     {
+        flag=true;
         std::lock_guard<std::mutex> guard(m);
         if (workers.size() < num_threads)
         {
             thread_safe_worklist_t *wl = new thread_safe_worklist_t;
             worklists.push_back(wl);
-            std::thread *t = new std::thread(keep_working, worklists.back(), &flag);
+            std::thread *t = new std::thread(keep_working, worklists.back(),&flag);
             workers.push_back(t);
         }
     }
@@ -90,16 +91,15 @@ class thread_pool_t
 public:
     thread_pool_t(unsigned _nthreads) : num_threads(_nthreads) {}
     int get_workers_size() { return workers.size(); }
-    void close()
-    {
-        flag = false;
-    }
+   
     void join_threads()
     {
+        flag=false;
         for (auto worker : workers)
         {
-            (*worker).join();
+            worker->join();
         }
+        std::cout << "Terminated Gracefully !" << std::endl;
     }
     /**
      * @brief Get the worklist object which has the smallest
