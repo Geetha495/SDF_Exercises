@@ -1,4 +1,4 @@
-name: Compile and Run Ex1
+name: Compile and Run ${file}
 on: [push]
 jobs:
   Compile-and-run-Ex1:
@@ -10,7 +10,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
       - name: Compile
-        run: g++ Ex1/Ex1.cpp 
+        run: g++ {file}.cpp -o {file} 
       - name: Run
-        run: ./a.out
+        run: ./{file}
       - run: echo "🍏 This job's status is ${{ job.status }}."
