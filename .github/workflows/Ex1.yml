@@ -10,7 +10,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v2
       - name: Compile
-        run: g++ {file}.cpp -o {file} 
+        run: g++ Ex1/Ex1.cpp 
       - name: Run
-        run: ./{file}
+        run: ./a.out
       - run: echo "🍏 This job's status is ${{ job.status }}."
