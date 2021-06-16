@@ -4,9 +4,9 @@
 
 [2](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex2). Take the [thread_pool](https://github.com/sbjoshi/sanganak-examples/tree/main/cs1023-2021-cpp-examples/thread_pool) example and make it terminate gracefully.
 
-[3](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex3). Implement a thread_pool with a single queue instead of one queue per thread.
+[3](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex3). Implement a [thread_pool](https://github.com/sbjoshi/sanganak-examples/tree/main/cs1023-2021-cpp-examples/thread_pool) with a single queue instead of one queue per thread.
 
-[4](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex4). Make the thread_pool a singleton
+[4](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex4). Make the [thread_pool](https://github.com/sbjoshi/sanganak-examples/tree/main/cs1023-2021-cpp-examples/thread_pool) a singleton
 
 5. Implement a thread_pool with one queue per thread where the thread will terminate if the queue is empty. In this case, the pool need to create another worker thread if there are lesser threads than std::'thread'::hardware_concurrency() .
 
