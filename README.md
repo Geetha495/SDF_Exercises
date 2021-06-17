@@ -37,10 +37,10 @@
 18. Implement a linear search and a binary search algorithm on an array/vector as strategies. (DO NOT use search available in standard library)
 
 19. Regarding visitor pattern discussed in the class. The exercise below are in no particular order and one can do mix and match:
-  i. Fix the parsing and/or evaluation so that the answer expected for (3+4-5+6-7) = 1
-  ii. Make the example generic (either by making use of any generic or using templates for const_exprt) for taking different kinds of constants
-  iii. Enrich the input language by supporting other binary operators (mul_exprt, div_exprt, rem_exprt, shr_exprt (>>), shl_exprt(<<) etc)
-  iv. Add var_exprt with type info and separately implement contextt or symbol_tablet that can provide a value for variable
-  v. Remove the need for dynamic_cast by augmenting interface of visitort for all expressions.
+  - Fix the parsing and/or evaluation so that the answer expected for (3+4-5+6-7) = 1
+  - Make the example generic (either by making use of any generic or using templates for const_exprt) for taking different kinds of constants
+  - Enrich the input language by supporting other binary operators (mul_exprt, div_exprt, rem_exprt, shr_exprt (>>), shl_exprt(<<) etc)
+  - Add var_exprt with type info and separately implement contextt or symbol_tablet that can provide a value for variable
+  - Remove the need for dynamic_cast by augmenting interface of visitort for all expressions.
 
 20. The iterator defined for the tree at (https://github.com/sbjoshi/sanganak-examples/blob/main/cs1023-2021-cpp-examples/iterator/btree.cpp (Links to an external site.)). Make the iterator compatible with standard template library so that one can use algorithms that use ForwardIterator such as (count/count_if, copy, transform etc)
