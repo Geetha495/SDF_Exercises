@@ -1,4 +1,5 @@
 #include<iostream>
+#include<cmath>
 
 #define maxSize 5
 template<typename T>
@@ -91,35 +92,17 @@ class Matrix
 		}
 	}
 
-void display()
-{
-	for (int i=0; i<m; i++)
+	void display()
 	{
-		std::cout<<"\t";
-		for (int j=0; j<r.n; j++)
-			std::cout << mtrx[i][j] << " ";
-		std::cout << std::endl;
-	}
-}
-
-
-
-	Matrix operator^(int p)
-	{
-		if(p==-1)
+		for (int i=0; i<m; i++)
 		{
-			if(m==r.n)
-			{
-				Matrix inv(m,m);
-				//need to write
-				
-			}
+			std::cout<<"\t";
+			for (int j=0; j<r.n; j++)
+				std::cout << mtrx[i][j] << " ";
+			std::cout << std::endl;
 		}
-
-
 	}
 };
-
 
 template<typename T>
 class Row  
@@ -132,7 +115,7 @@ class Row
 	{
 		if (j >= n) 
 		{
-			std::cout << "Matrix index out of bound, exiting";
+			std::cout << "Matrix index out of bound(row), exiting";
 			exit(0);
 		}
 		return row[j];
