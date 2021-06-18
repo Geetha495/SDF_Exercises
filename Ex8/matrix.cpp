@@ -149,4 +149,6 @@ int main()
 	std::cout<<"multiply : "<<std::endl;
 	(A*B).display();
 
+	return 0;
+
 }
