@@ -1,0 +1,1 @@
+I guess it is same as [Ex19](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex19)
