@@ -1,5 +1,6 @@
 #include <iostream>
 #include <cmath>
+#include<assert.h>
 
 #define maxSize 5
 
@@ -113,10 +114,8 @@ public:
 
 	Matrix<float> operator^(int n)
 	{
-		if (n == -1)
-		{
-			return this->inv();
-		}
+		assert(n==-1);
+		return this->inv();
 	}
 
 	void display()
