@@ -1,14 +1,19 @@
-//######################################################
 
-/**
- * works only when the expression has odd number of numbers :( 
- * 
- * Need to Change :(
- */
+/*    Copyright (C) 2021  Saurabh Joshi
 
-//############################
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
 
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
 
+    You should have received a copy of the GNU General Public License
+along with this program.  If not, see <https://www.gnu.org/licenses/>.
+*/
 
 #include <stack>
 #include <any>
@@ -21,12 +26,20 @@
 #include <cassert>
 #include <fmt/format.h>
 #include <vector>
+#include <chrono>
+using myclock_t = std::chrono::high_resolution_clock;
+using msduration_t = std::chrono::duration<double, std::milli>;
 
 class exprt;
+class plus_exprt;
+class minus_exprt;
+class const_exprt;
 class visitort
 {
 public:
-	virtual void visit(exprt *) = 0;
+	virtual void visit(plus_exprt *) = 0;
+	virtual void visit(minus_exprt *) = 0;
+	virtual void visit(const_exprt *) = 0;
 };
 class exprt
 {
@@ -86,26 +99,6 @@ public:
 	{
 		fmt::print("{}\n", print_str.data());
 	}
-	virtual void visit(exprt *e)
-	{
-		if (dynamic_cast<plus_exprt *>(e))
-		{
-			visit(dynamic_cast<plus_exprt *>(e));
-		}
-		else if (dynamic_cast<minus_exprt *>(e))
-		{
-			visit(dynamic_cast<minus_exprt *>(e));
-		}
-		else if (dynamic_cast<const_exprt *>(e))
-		{
-
-			visit(dynamic_cast<const_exprt *>(e));
-		}
-		else
-		{
-			assert(false && "illegal expression type");
-		}
-	}
 	virtual void visit(plus_exprt *pe)
 	{
 		fmt::format_to(print_str, "( plus_exprt : ");
@@ -164,36 +157,11 @@ public:
 		es.pop();
 		auto op2 = es.top();
 		es.pop();
-		//#########################################################
-
-		es.push(op1 - op2);
-
-		//#########################################################
-
+		es.push(op2 - op1);
 	}
 	void visit(const_exprt *ce)
 	{
 		es.push(std::any_cast<int>(ce->getval()));
-	}
-	virtual void visit(exprt *e)
-	{
-		if (dynamic_cast<plus_exprt *>(e))
-		{
-			visit(dynamic_cast<plus_exprt *>(e));
-		}
-		else if (dynamic_cast<minus_exprt *>(e))
-		{
-			visit(dynamic_cast<minus_exprt *>(e));
-		}
-		else if (dynamic_cast<const_exprt *>(e))
-		{
-
-			visit(dynamic_cast<const_exprt *>(e));
-		}
-		else
-		{
-			assert(false && "illegal expression type");
-		}
 	}
 };
 
@@ -205,19 +173,8 @@ exprt *parse_expression(std::istringstream &str, unsigned pos)
 	str >> num;
 	std::any anum(num);
 	exprt *op1 = new const_exprt(anum);
-
 	char c;
 	str.get(c);
-
-
-	//####################################################
-	
-	int num2;
-	str >> num2;
-	std::any anum2(num2);
-	exprt *op2 = new const_exprt(anum2);
-
-	//#########################################################
 	switch (c)
 	{
 	case ';':
@@ -225,27 +182,37 @@ exprt *parse_expression(std::istringstream &str, unsigned pos)
 		break;
 	case '+':
 	{
-		//#########################################################
 		
-		auto a = dynamic_cast<exprt *>(new plus_exprt(std::move(std::vector<exprt *>({op1, op2}))));
 		exprt *subexpr = parse_expression(str, str.tellg());
 		//std::vector<exprt*> ops = {op1,subexpr};
-		return new plus_exprt(std::move(std::vector<exprt *>({a, subexpr})));
-
-		//#########################################################
-
+		return new plus_exprt(std::move(std::vector<exprt *>({subexpr, op1})));
 	}
 	break;
 	case '-':
 	{
+		//##############################################################
+		int num2;
+		str >> num2;
+		std::any anum2(num2);
+		exprt *op2 = new const_exprt(anum2);
+		char c;
+		str.get(c);
+		exprt* temp = new minus_exprt(std::move(std::vector<exprt *>({op1,op2})));
+		if(c=='-')
+		{
+			exprt *subexpr = parse_expression(str, str.tellg());
+			return new minus_exprt(std::move(std::vector<exprt *>({subexpr ,temp})));
+		}
+		if(c=='+')
+		{
+			exprt *subexpr = parse_expression(str, str.tellg());
+			return new plus_exprt(std::move(std::vector<exprt *>({subexpr ,temp})));
+		}
+		if(c==';')
+		{
+			return temp;
+		}
 		//########################################################
-		
-		auto s = dynamic_cast<exprt *>(new minus_exprt(std::move(std::vector<exprt *>({op1, op2}))));
-		exprt *subexpr = parse_expression(str, str.tellg());
-		return new minus_exprt(std::move(std::vector<exprt *>({s, subexpr})));
-
-		//#########################################################
-
 	}
 	break;
 	};
@@ -262,10 +229,9 @@ int main()
 	exprt *e = parse_expression(istream, 0);
 	print_visitort pv;
 	e->visit(pv);
-	//pv.print();
+	pv.print();
 	eval_visitort ev;
 	e->visit(ev);
 	fmt::print("Expr evaluation: {}\n", ev.get_result());
-
 	return EXIT_SUCCESS;
 }
