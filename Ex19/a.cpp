@@ -164,7 +164,46 @@ public:
 		es.push(std::any_cast<int>(ce->getval()));
 	}
 };
+exprt* parse_expression(std::istringstream& str,unsigned pos);
+exprt* instant(std::istringstream &str,exprt* op1,char i)
+{
+	int num2;
+	str >> num2;
+	std::any anum2(num2);
+	exprt *op2 = new const_exprt(anum2);
+	exprt* temp;
+	switch(i)
+	{
+		case '-' :
+		{
+			temp = new minus_exprt(std::move(std::vector<exprt *>({op1,op2})));
+			break;
+		}
+	}
+	char c;
+	str.get(c);
+	exprt* subexpr;
+	if(c!=';')
+		subexpr = parse_expression(str, str.tellg());
+	switch (c)
+	{
+		case '-' :
+		{	
+			return new minus_exprt(std::move(std::vector<exprt *>({subexpr ,temp})));
+		}
+		case '+':
+		{
+			return new plus_exprt(std::move(std::vector<exprt *>({subexpr ,temp})));
+		}
+		case ';':
+		{
+			return temp;
+		}
+	}
+	assert(false && "illegal string");
+	return nullptr;
 
+}
 exprt *parse_expression(std::istringstream &str, unsigned pos)
 {
 
@@ -190,29 +229,7 @@ exprt *parse_expression(std::istringstream &str, unsigned pos)
 	break;
 	case '-':
 	{
-		//##############################################################
-		int num2;
-		str >> num2;
-		std::any anum2(num2);
-		exprt *op2 = new const_exprt(anum2);
-		char c;
-		str.get(c);
-		exprt* temp = new minus_exprt(std::move(std::vector<exprt *>({op1,op2})));
-		if(c=='-')
-		{
-			exprt *subexpr = parse_expression(str, str.tellg());
-			return new minus_exprt(std::move(std::vector<exprt *>({subexpr ,temp})));
-		}
-		if(c=='+')
-		{
-			exprt *subexpr = parse_expression(str, str.tellg());
-			return new plus_exprt(std::move(std::vector<exprt *>({subexpr ,temp})));
-		}
-		if(c==';')
-		{
-			return temp;
-		}
-		//########################################################
+		return instant(str,op1,'-');
 	}
 	break;
 	};
