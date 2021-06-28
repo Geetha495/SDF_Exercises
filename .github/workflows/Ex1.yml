@@ -1,5 +1,5 @@
 name: Compile and Run ${file}
-on: [push]
+on: [pull_request]
 jobs:
   Compile-and-run-Ex1:
     runs-on: ubuntu-latest
