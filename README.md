@@ -20,7 +20,7 @@
 
 [10](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex10). Implement a template adapter class stack which uses [(1)](https://github.com/Geetha495/SDF_Exercises/blob/main/Ex10/list.cpp) an std::list [(2)](https://github.com/Geetha495/SDF_Exercises/blob/main/Ex10/array.cpp) an std::array.
 
-11. Implement a template adapter class multiset which uses std::map. Note that a multiset is a container which can contain multiple elements of the same value e.g., { 3,4,8,7,3,9,7} is a multiset because 3 and 7 appears twice. Implement methods to insert, remove, remove_all so that a new element can be inserted in this multiset, one element of the given value can be removed and all the elements with the given value can be removed. (Hint: have something to maintain duplicity of an element).
+[11](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex11). Implement a template adapter class multiset which uses std::map. Note that a multiset is a container which can contain multiple elements of the same value e.g., { 3,4,8,7,3,9,7} is a multiset because 3 and 7 appears twice. Implement methods to insert, remove, remove_all so that a new element can be inserted in this multiset, one element of the given value can be removed and all the elements with the given value can be removed. (Hint: have something to maintain duplicity of an element).
 
 12. Implement a template adapter class queue_t using two std::stack. list_t should allow enqueue and deque operation. enqueue adds an element to the queue and dequeue removes the element which was the oldest element from the queue. Unlike stack this is a FIFO (First-in-First-Out) interface. If you need implement a head operation which returns the element at the head of the queue (oldest element).
 
