@@ -24,7 +24,7 @@
 
 [12](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex12). Implement a template adapter class queue_t using [two std::stack](https://github.com/Geetha495/SDF_Exercises/blob/main/Ex12/stack.cpp), [list](https://github.com/Geetha495/SDF_Exercises/blob/main/Ex12/list.cpp). This class should allow enqueue and deque operation. enqueue adds an element to the queue and dequeue removes the element which was the oldest element from the queue. Unlike stack this is a FIFO (First-in-First-Out) interface. If you need implement a head operation which returns the element at the head of the queue (oldest element).
 
-13. Implement a reverse iterator on the list that was given in the class. Implement rbegin() and rend() method and then the reverse iterator would go back in the list when you do ++. You need to have a pointer to previous listnode_t as well for this case.
+[13](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex13). Implement a reverse iterator on the list that was given in the class. Implement rbegin() and rend() method and then the reverse iterator would go back in the list when you do ++. You need to have a pointer to previous listnode_t as well for this case.
 
 14. Implement an iterator in the list (defined in the class and available in the repo) which only goes through element at even position in the list.
 
