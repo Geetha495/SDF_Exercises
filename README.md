@@ -28,7 +28,7 @@
 
 [14](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex14). Implement an iterator in the list (defined in the class and available in the repo) which only goes through element at even position in the list.
 
-15. Define a class readert which keeps getting a string from a user and then send it to all its observers. Implement an observer which just prints this string, another observer which prints the frequency of every alphabet inside the string (a: 4, b:5, c:6 indicating 'a' appeared 4 times in the string etc), another observer that takes the string writes it to a file. (a) Implement all the classes in a thread-safe manner (b) use subscribe and unsubscribe method and random times and see how the behaviour changes.
+[15](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex15). Define a class readert which keeps getting a string from a user and then send it to all its observers. Implement an observer which just prints this string, another observer which prints the frequency of every alphabet inside the string (a: 4, b:5, c:6 indicating 'a' appeared 4 times in the string etc), another observer that takes the string writes it to a file. (a) Implement all the classes in a thread-safe manner (b) use subscribe and unsubscribe method and random times and see how the behaviour changes.
 
 16. Think of cases where the update() on the observer is computationally very heavy. Implement an event manager that shields the subject from the runtime of the update() of the observer. Think of scenario with multiple subjects and observers where event manager can be really useful.
 
