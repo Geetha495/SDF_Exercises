@@ -26,7 +26,7 @@
 
 [13](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex13). Implement a reverse iterator on the list that was given in the class. Implement rbegin() and rend() method and then the reverse iterator would go back in the list when you do ++. You need to have a pointer to previous listnode_t as well for this case.
 
-14. Implement an iterator in the list (defined in the class and available in the repo) which only goes through element at even position in the list.
+[14](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex14). Implement an iterator in the list (defined in the class and available in the repo) which only goes through element at even position in the list.
 
 15. Define a class readert which keeps getting a string from a user and then send it to all its observers. Implement an observer which just prints this string, another observer which prints the frequency of every alphabet inside the string (a: 4, b:5, c:6 indicating 'a' appeared 4 times in the string etc), another observer that takes the string writes it to a file. (a) Implement all the classes in a thread-safe manner (b) use subscribe and unsubscribe method and random times and see how the behaviour changes.
 
