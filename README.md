@@ -34,7 +34,7 @@
 
 [17](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex17). Implement various sorting algorithms (insertion sort, quick sort, merge sort) as a strategy and ask a user to choose at run-time which of these to use for sorting. (DO NOT use sort available in the standard library)
 
-18. Implement a linear search and a binary search algorithm on an array/vector as strategies. (DO NOT use search available in standard library)
+[18](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex18). Implement a linear search and a binary search algorithm on an array/vector as strategies. (DO NOT use search available in standard library)
 
 [19](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex19). Regarding visitor pattern discussed in the class. The exercise below are in no particular order and one can do mix and match:
   - [=>](https://github.com/Geetha495/SDF_Exercises/blob/main/Ex19/a.cpp) Fix the parsing and/or evaluation so that the answer expected for (3+4-5+6-7) = 1
