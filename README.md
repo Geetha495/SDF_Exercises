@@ -32,7 +32,7 @@
 
 [16](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex16). Think of cases where the update() on the observer is computationally very heavy. Implement an event manager that shields the subject from the runtime of the update() of the observer. Think of scenario with multiple subjects and observers where event manager can be really useful.
 
-17. Implement various sorting algorithms (insertion sort, quick sort, merge sort) as a strategy and ask a user to choose at run-time which of these to use for sorting. (DO NOT use sort available in the standard library)
+[17](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex17). Implement various sorting algorithms (insertion sort, quick sort, merge sort) as a strategy and ask a user to choose at run-time which of these to use for sorting. (DO NOT use sort available in the standard library)
 
 18. Implement a linear search and a binary search algorithm on an array/vector as strategies. (DO NOT use search available in standard library)
 
