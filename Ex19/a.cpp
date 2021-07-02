@@ -162,7 +162,20 @@ public:
 		es.push(std::any_cast<int>(ce->getval()));
 	}
 };
-
+void insert(int num,std::stringstream& str,int num3)
+{
+	std::string temp1;
+	if(num>=0)
+	{
+		temp1 = str.str().substr(3,str.str().size()-1);
+	}
+	else{
+		temp1 =  str.str().substr(4,str.str().size()-1);
+	}
+	str.str(std::string());
+	str << num3;
+	str << temp1;
+}
 exprt *parse_expression(std::stringstream &str, unsigned pos)
 {
 
@@ -183,17 +196,7 @@ exprt *parse_expression(std::stringstream &str, unsigned pos)
 		int num2;
 		str >> num2;
 		int num3 =num+num2;	
-		std::string temp1,temp2;
-		if(num>=0)
-		{
-			temp1 = str.str().substr(3,str.str().size()-1);
-		}
-		else{
-			temp1 =  str.str().substr(4,str.str().size()-1);
-		}
-		str.str(std::string());
-		str << num3;
-		str << temp1;
+		insert(num,str,num3);
 		return parse_expression(str,0);	
 	}
 	break;
@@ -203,17 +206,7 @@ exprt *parse_expression(std::stringstream &str, unsigned pos)
 		str >> num2;
 		int num3;
 		num3 =num-num2;	
-		std::string temp1,temp2;
-		if(num>=0)
-		{
-			temp1 = str.str().substr(3,str.str().size()-1);
-		}
-		else if(num<0){
-			temp1 =  str.str().substr(4,str.str().size()-1);
-		}
-		str.str(std::string());
-		str << num3;
-		str << temp1;
+		insert(num,str,num3);
 		return parse_expression(str,0);	
 	}
 	break;
