@@ -27,8 +27,6 @@ along with this program.  If not, see <https://www.gnu.org/licenses/>.
 #include <fmt/format.h>
 #include <vector>
 #include <chrono>
-using myclock_t = std::chrono::high_resolution_clock;
-using msduration_t = std::chrono::duration<double, std::milli>;
 
 class exprt;
 class plus_exprt;
@@ -164,50 +162,11 @@ public:
 		es.push(std::any_cast<int>(ce->getval()));
 	}
 };
-exprt* parse_expression(std::istringstream& str,unsigned pos);
-exprt* instant(std::istringstream &str,exprt* op1,char i)
-{
-	int num2;
-	str >> num2;
-	std::any anum2(num2);
-	exprt *op2 = new const_exprt(anum2);
-	exprt* temp;
-	switch(i)
-	{
-		case '-' :
-		{
-			temp = new minus_exprt(std::move(std::vector<exprt *>({op1,op2})));
-			break;
-		}
-	}
-	char c;
-	str.get(c);
-	exprt* subexpr;
-	if(c!=';')
-		subexpr = parse_expression(str, str.tellg());
-	switch (c)
-	{
-		case '-' :
-		{	
-			return new minus_exprt(std::move(std::vector<exprt *>({subexpr ,temp})));
-		}
-		case '+':
-		{
-			return new plus_exprt(std::move(std::vector<exprt *>({subexpr ,temp})));
-		}
-		case ';':
-		{
-			return temp;
-		}
-	}
-	assert(false && "illegal string");
-	return nullptr;
 
-}
-exprt *parse_expression(std::istringstream &str, unsigned pos)
+exprt *parse_expression(std::stringstream &str, unsigned pos)
 {
 
-	//str.seekg(pos);
+	str.seekg(pos);
 	int num;
 	str >> num;
 	std::any anum(num);
@@ -221,15 +180,41 @@ exprt *parse_expression(std::istringstream &str, unsigned pos)
 		break;
 	case '+':
 	{
-		
-		exprt *subexpr = parse_expression(str, str.tellg());
-		//std::vector<exprt*> ops = {op1,subexpr};
-		return new plus_exprt(std::move(std::vector<exprt *>({subexpr, op1})));
+		int num2;
+		str >> num2;
+		int num3 =num+num2;	
+		std::string temp1,temp2;
+		if(num>=0)
+		{
+			temp1 = str.str().substr(3,str.str().size()-1);
+		}
+		else{
+			temp1 =  str.str().substr(4,str.str().size()-1);
+		}
+		str.str(std::string());
+		str << num3;
+		str << temp1;
+		return parse_expression(str,0);	
 	}
 	break;
 	case '-':
 	{
-		return instant(str,op1,'-');
+		int num2;
+		str >> num2;
+		int num3;
+		num3 =num-num2;	
+		std::string temp1,temp2;
+		if(num>=0)
+		{
+			temp1 = str.str().substr(3,str.str().size()-1);
+		}
+		else if(num<0){
+			temp1 =  str.str().substr(4,str.str().size()-1);
+		}
+		str.str(std::string());
+		str << num3;
+		str << temp1;
+		return parse_expression(str,0);	
 	}
 	break;
 	};
@@ -242,11 +227,11 @@ int main()
 {
 	std::string in_str;
 	std::cin >> in_str;
-	std::istringstream istream(in_str.c_str());
-	exprt *e = parse_expression(istream, 0);
-	print_visitort pv;
-	e->visit(pv);
-	pv.print();
+	std::stringstream stream(in_str.c_str());
+	exprt *e = parse_expression(stream, 0);
+	//print_visitort pv;
+	//e->visit(pv);
+	//pv.print();
 	eval_visitort ev;
 	e->visit(ev);
 	fmt::print("Expr evaluation: {}\n", ev.get_result());
