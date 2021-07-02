@@ -43,4 +43,4 @@
   - Add var_exprt with type info and separately implement contextt or symbol_tablet that can provide a value for variable
   - [=>](https://github.com/Geetha495/SDF_Exercises/blob/main/Ex19/e.cpp) Remove the need for dynamic_cast by augmenting interface of visitort for all expressions.
 
-20. The iterator defined for the tree at (https://github.com/sbjoshi/sanganak-examples/blob/main/cs1023-2021-cpp-examples/iterator/btree.cpp (Links to an external site.)). Make the iterator compatible with standard template library so that one can use algorithms that use ForwardIterator such as (count/count_if, copy, transform etc)
+[20](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex20). The iterator defined for the tree at (https://github.com/sbjoshi/sanganak-examples/blob/main/cs1023-2021-cpp-examples/iterator/btree.cpp (Links to an external site.)). Make the iterator compatible with standard template library so that one can use algorithms that use ForwardIterator such as (count/count_if, copy, transform etc)
