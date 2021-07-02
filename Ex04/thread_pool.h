@@ -59,8 +59,8 @@ void keep_working(worklistt *wl, bool* flag)
 
 /**
  * @brief thread_pool_t is a thread pool class that creates up to
- * num_threads number of threads and similar number of threadsafe
- * worklist. Each thread will operate on its corresponding worklist.
+ * num_threads number of threads and only one threadsafe
+ * worklist. Each thread will operate on that worklist.
  * 
  */
 class thread_pool_t
@@ -71,8 +71,8 @@ class thread_pool_t
     static bool flag; 
     std::mutex m;                       //mutex for thread-safety
     /**
-     * @brief Create a worker object if pool is not saturated. Corresponding worklist
-     * is also created in a thread-safe manner.
+     * @brief Create a worker object if pool is not saturated. No extra worklist
+     * is  created.
      * 
      */
     void create_worker()
@@ -129,12 +129,10 @@ public:
      * @brief Get the worklist object which has the smallest
      *     number of pending "work" in the list. 
      * 
-     * Caution: This is not thread-safe. Ideally, pool should be 
+     * Caution: This is thread-safe. Here, pool is
      * a singleton so that multiple objects are not present.
-     * The worklist pointer that gets returned may not be the smallest
-     * when it was returned (because it's not thread-safe). For our purpose
-     * this is okay because we are just looking to assign work to a worker
-     * which has "lesser" work. So a little bit of approximation is fine.
+     * The worklist pointer that gets returned will be the smallest
+     * when it was returned (because it's  thread-safe).
      * 
      * @return worklistt* , a pointer to the worklist having "lesser" work 
      */

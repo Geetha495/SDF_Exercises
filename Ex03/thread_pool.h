@@ -59,8 +59,8 @@ void keep_working(worklistt *wl, bool* flag)
 
 /**
  * @brief thread_pool_t is a thread pool class that creates up to
- * num_threads number of threads and similar number of threadsafe
- * worklist. Each thread will operate on its corresponding worklist.
+ * num_threads number of threads and only one threadsafe
+ * worklist. Each thread will operate on that worklist.
  * 
  */
 class thread_pool_t
@@ -71,8 +71,8 @@ class thread_pool_t
     static bool flag; 
     std::mutex m;                       //mutex for thread-safety
     /**
-     * @brief Create a worker object if pool is not saturated. Corresponding worklist
-     * is also created in a thread-safe manner.
+     * @brief Create a worker object if pool is not saturated. In this exercise, worklist
+     * is not created (to maintain single queue).
      * 
      */
     void create_worker()
