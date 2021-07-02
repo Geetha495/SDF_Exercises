@@ -38,17 +38,14 @@ void empty_queue()
 
 /**
  * @brief keep_working is a function for the worker threads to 
- * take worklist wl, keep getting the work (std::function<void()>)
- * and execute it, if the worklist is empty it will return {} as 
- * part of std::optional 
+ * wait and worker keep getting the work (std::function<void()>)
+ * and execute it. Untill all the works are pushed(flag=0) and no more work to be done(wl->empty()).
  * 
  * @param wl worklist from which the thread will keep retrieving
  * work (std::function<void()>) and execute  
  */
 void keep_working(worklistt *wl, bool* flag)
 {
-    // if(wl->empty())
-    //     std::cout<<"empty"<<std::endl;
     while ( ( !(wl->empty()) ) && (*flag) )
     {
         std::optional<std::function<void()>> work = wl->get();
