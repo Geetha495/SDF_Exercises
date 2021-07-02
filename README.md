@@ -8,7 +8,7 @@
 
 [4](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex04). Make the [thread_pool](https://github.com/sbjoshi/sanganak-examples/tree/main/cs1023-2021-cpp-examples/thread_pool) a singleton
 
-5. Implement a thread_pool with one queue per thread where the thread will terminate if the queue is empty. In this case, the pool need to create another worker thread if there are lesser threads than std::'thread'::hardware_concurrency() .
+[5](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex05). Implement a thread_pool with one queue per thread where the thread will terminate if the queue is empty. In this case, the pool need to create another worker thread if there are lesser threads than std::'thread'::hardware_concurrency() .
 
 [6](https://github.com/Geetha495/SDF_Exercises/tree/main/Ex06). Explore destructors and why they need to be virtual.
 
