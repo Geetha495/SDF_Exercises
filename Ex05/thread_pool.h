@@ -68,8 +68,9 @@ class thread_pool_t
     std::vector<worklistt*> worklists; //vector that stores pointers to worklists
     std::mutex m; //mutex for thread-safety
     /**
-     * @brief Create a worker object if pool is not saturated and if corresponding  queue is not empty. Corresponding worklist
-     * is also created in a thread-safe manner.
+     * @brief Create a worker object if pool is not saturated and if there are lesser
+     * threads than std::'thread'::hardware_concurrency() and if corresponding 
+     * queue is not empty. Corresponding worklist is also created in a thread-safe manner.
      * 
      */
     void create_worker()
