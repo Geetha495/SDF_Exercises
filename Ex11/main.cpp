@@ -31,16 +31,20 @@ public:
 	}
 	void remove(T t)
 	{
-		if((*this)[t])
+		if((*this)[t]>1)
 		{
 			(*this)[t]--;
+		}
+		else if((*this)[t]==1)
+		{
+			this->erase(t);
 		}
 	}
 	void remove_all(T t)
 	{
 		if((*this)[t])
 		{
-			(*this)[t]=0;
+			this->erase(t);
 		}
 	}
 
